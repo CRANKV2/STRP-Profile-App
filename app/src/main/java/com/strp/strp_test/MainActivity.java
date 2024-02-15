@@ -1,6 +1,7 @@
 package com.strp.strp_test;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private CardView lastSelectedCard;
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,35 +80,75 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Set up ActionBar
-        setSupportActionBar(binding.toolbar);  // Assuming you have a Toolbar with id 'toolbar' in your layout
+        setSupportActionBar(binding.toolbar);
 
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
-
-        // Replace your_start_destination_id, other_top_level_destination_id1, other_top_level_destination_id2 with actual IDs
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
                 .build();
 
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main);
-        NavController navController = navHostFragment.getNavController();
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.mobile_navigation);
 
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
+        if (navHostFragment != null) {
+            navController = navHostFragment.getNavController();
+
+            if (navController != null) {
+                NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+                NavigationUI.setupWithNavController(navView, navController);
+            } else {
+                Log.e("MainActivity", "NavController is null");
+            }
+        } else {
+            Log.e("MainActivity", "NavHostFragment is null");
+        }
     }
 
-
-    private void activateProfile(MaterialCardView selectedCard) {
+    private void activateProfile(CardView selectedCard) {
         if (lastSelectedCard != null) {
-            ImageView lastCheckmarkOverlay = lastSelectedCard.findViewById(R.id.checkmarkOverlay);
-            lastCheckmarkOverlay.setVisibility(View.GONE);
-            lastSelectedCard.setCardBackgroundColor(ContextCompat.getColor(this, R.color.black));
+            int lastCheckmarkOverlayId = getCheckmarkOverlayId(lastSelectedCard);
+            hideCheckmarkOverlay(lastCheckmarkOverlayId, lastSelectedCard);
         }
 
-        ImageView checkmarkOverlay = selectedCard.findViewById(R.id.checkmarkOverlay);
-        checkmarkOverlay.setVisibility(View.VISIBLE);
-        selectedCard.setCardBackgroundColor(ContextCompat.getColor(this, R.color.activatedColor));
+        int checkmarkOverlayId = getCheckmarkOverlayId(selectedCard);
+        showCheckmarkOverlay(checkmarkOverlayId, selectedCard);
+        ((MaterialCardView) selectedCard).setCardBackgroundColor(ContextCompat.getColor(this, R.color.activatedColor));
 
         lastSelectedCard = selectedCard;
+    }
+
+    private int getCheckmarkOverlayId(CardView card) {
+        int cardId = card.getId();
+
+        if (cardId == R.id.cardStockMode) {
+            return R.id.checkmarkOverlayStockMode;
+        } else if (cardId == R.id.cardUltraBatteryMode) {
+            return R.id.checkmarkOverlayUltraBatteryMode;
+        } else if (cardId == R.id.cardBalancedMode) {
+            return R.id.checkmarkOverlayBalancedMode;
+        } else if (cardId == R.id.cardGamingMode) {
+            return R.id.checkmarkOverlayGamingMode;
+        } else if (cardId == R.id.cardAutonomousMode) {
+            return R.id.checkmarkOverlayAutoMode;
+        } else {
+            return 0;
+        }
+    }
+
+    private void hideCheckmarkOverlay(int checkmarkOverlayId, View card) {
+        if (checkmarkOverlayId != 0) {
+            ImageView checkmarkOverlay = card.findViewById(checkmarkOverlayId);
+            checkmarkOverlay.setVisibility(View.GONE);
+
+            // Adjusted to use MaterialCardView
+            ((MaterialCardView) card).setCardBackgroundColor(ContextCompat.getColor(this, R.color.black));
+        }
+    }
+
+    private void showCheckmarkOverlay(int checkmarkOverlayId, View card) {
+        if (checkmarkOverlayId != 0) {
+            ImageView checkmarkOverlay = card.findViewById(checkmarkOverlayId);
+            checkmarkOverlay.setVisibility(View.VISIBLE);
+        }
     }
 
     public void onClickStockMode(View view) {

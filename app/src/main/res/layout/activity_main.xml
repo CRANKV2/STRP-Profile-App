@@ -1,0 +1,174 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="match_parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground"
+            android:elevation="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bottom_nav_menu" />
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bottomNavigationView"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!-- Add your content here -->
+                <!-- Logo Card -->
+                <LinearLayout
+                    android:id="@+id/logoCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="onClickLogoCard"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+                    <!-- Logo content goes here -->
+                </LinearLayout>
+
+                <!-- Cards Layout -->
+                <LinearLayout
+                    android:id="@+id/cardsLayout"
+                    android:layout_width="380dp"
+                    android:layout_height="780dp"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <!-- Card 1: Stock Mode -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardStockMode"
+                        android:layout_width="300dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="1dp"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:foreground="@drawable/ripple_golden"
+                        android:onClick="onClickStockMode"
+                        android:padding="15dp"
+                        app:cardCornerRadius="15dp"
+                        app:cardElevation="12dp"
+                        app:cardUseCompatPadding="true">
+
+                        <!-- Card content goes here -->
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/black">
+
+                            <!-- Add the following line for the checkmark overlay -->
+                            <ImageView
+                                android:id="@+id/checkmarkOverlay"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="top|start"
+                                android:src="@drawable/overlay_checkmark"
+                                android:visibility="gone" />
+
+                            <!-- Inner content of the card -->
+                            <TextView
+                                android:id="@+id/textStockMode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:gravity="center"
+                                android:text="@string/stock_mode_noptimal_performance"
+                                android:textColor="@color/md_theme_dark_onPrimaryContainer"
+                                android:textSize="20sp" />
+
+                        </RelativeLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <!-- Card 2: Ultra Battery Mode -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardUltraBatteryMode"
+                        android:layout_width="300dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="1dp"
+                        android:clickable="true"
+                        android:foreground="@drawable/ripple_golden"
+                        android:onClick="onClickUltraBatteryMode"
+                        android:padding="24dp"
+                        app:cardCornerRadius="15dp"
+                        app:cardElevation="12dp"
+                        app:cardUseCompatPadding="true">
+
+                        ...
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Card 3: Balanced Mode -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardBalancedMode"
+                        android:layout_width="300dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="1dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="@drawable/ripple_golden"
+                        android:onClick="onClickBalancedMode"
+                        android:padding="24dp"
+                        app:cardCornerRadius="15dp"
+                        app:cardElevation="12dp"
+                        app:cardUseCompatPadding="true">
+
+                        ...
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Card 4: Gaming Mode -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardGamingMode"
+                        android:layout_width="300dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="1dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="@drawable/ripple_golden"
+                        android:onClick="onClickGamingMode"
+                        android:padding="24dp"
+                        app:cardCornerRadius="15dp"
+                        app:cardElevation="12dp"
+                        app:cardUseCompatPadding="true">
+
+                        ...
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Card 5: Autonomous Mode -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardAutonomousMode"
+                        android:layout_width="300dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="1dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="@drawable/ripple_golden"
+                        android:onClick="onClickAutonomousMode"
+                        android:padding="24dp"
+                        app:cardCornerRadius="15dp"
+                        app:cardElevation="12dp"
+                        app:cardUseCompatPadding="true">
+
+                        ...
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+            </RelativeLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

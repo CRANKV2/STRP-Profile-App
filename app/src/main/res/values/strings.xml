@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">STRP Profile Swap</string>
+    <string name="stock_mode_noptimal_performance">Stock Mode\nOptimal performance</string>
+    <string name="ultra_battery_mode_nmaximize_battery_life">Ultra Battery Mode\nMaximize battery life</string>
+    <string name="balanced_mode_balance">Balanced Mode\nOptimal balance</string>
+    <string name="gaming_mode_noptimized_for_gaming">Gaming Mode\nOptimized for gaming</string>
+    <string name="autonomous_mode_nautomatic_performance">Autonomous Mode\nAutomatic performance</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Extras</string>
+    <string name="title_home">Profiles</string>
+</resources>

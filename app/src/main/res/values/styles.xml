@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MyScrollbar">
+        <item name="android:scrollbarThumbVertical">@color/black</item>
+        <item name="android:scrollbarSize">8dp</item>
+    </style>
+</resources>

@@ -1,6 +1,28 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="match_parent">
+    <!-- Add Toolbar here -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:title="Your App Name" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment_activity_main"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:navGraph="@navigation/mobile_navigation"
+        app:defaultNavHost="true" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
@@ -36,7 +58,6 @@
                     android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
                     android:focusable="true"
-                    android:onClick="onClickLogoCard"
                     android:orientation="horizontal"
                     android:padding="16dp">
                     <!-- Logo content goes here -->
@@ -64,7 +85,8 @@
                         android:padding="15dp"
                         app:cardCornerRadius="15dp"
                         app:cardElevation="12dp"
-                        app:cardUseCompatPadding="true">
+                        app:cardUseCompatPadding="true"
+                        android:focusable="true">
 
                         <!-- Card content goes here -->
                         <RelativeLayout
@@ -95,7 +117,6 @@
                         </RelativeLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-
                     <!-- Card 2: Ultra Battery Mode -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cardUltraBatteryMode"
@@ -108,9 +129,10 @@
                         android:padding="24dp"
                         app:cardCornerRadius="15dp"
                         app:cardElevation="12dp"
-                        app:cardUseCompatPadding="true">
+                        app:cardUseCompatPadding="true"
+                        android:focusable="true">
 
-                        ...
+
                     </com.google.android.material.card.MaterialCardView>
 
                     <!-- Card 3: Balanced Mode -->
@@ -128,7 +150,7 @@
                         app:cardElevation="12dp"
                         app:cardUseCompatPadding="true">
 
-                        ...
+
                     </com.google.android.material.card.MaterialCardView>
 
                     <!-- Card 4: Gaming Mode -->
@@ -146,7 +168,7 @@
                         app:cardElevation="12dp"
                         app:cardUseCompatPadding="true">
 
-                        ...
+
                     </com.google.android.material.card.MaterialCardView>
 
                     <!-- Card 5: Autonomous Mode -->
@@ -164,7 +186,7 @@
                         app:cardElevation="12dp"
                         app:cardUseCompatPadding="true">
 
-                        ...
+
                     </com.google.android.material.card.MaterialCardView>
 
                 </LinearLayout>

@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private CardView lastSelectedCard;
-    private androidx.navigation.NavController NavController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,14 +77,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Set up ActionBar
+        setSupportActionBar(binding.toolbar);  // Assuming you have a Toolbar with id 'toolbar' in your layout
+
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
+
+        // Replace your_start_destination_id, other_top_level_destination_id1, other_top_level_destination_id2 with actual IDs
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main);
+        NavController navController = navHostFragment.getNavController();
+
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.cardsLayout, NavController);
+        NavigationUI.setupWithNavController(navView, navController);
     }
+
 
     private void activateProfile(MaterialCardView selectedCard) {
         if (lastSelectedCard != null) {

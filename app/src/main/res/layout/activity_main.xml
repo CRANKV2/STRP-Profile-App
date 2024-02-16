@@ -1,302 +1,308 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Add Toolbar here -->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:title="Stratosphere Performance v3.0" />
+        android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/black"
+            app:titleTextColor="@color/md_theme_dark_surfaceTint"
+            app:title="Stratosphere Performance v3.0"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintHeight_default="percent"
+        tools:ignore="ScrollViewCount">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigationView"
-            android:layout_width="0dp"
+        <!-- Wrap the existing content in a LinearLayout -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?android:attr/windowBackground"
-            android:elevation="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/bottom_nav_menu"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:orientation="vertical">
 
-        <ScrollView
-            android:id="@+id/scrollView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:fillViewport="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bottomNavigationView"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <RelativeLayout
+            <!-- Move the Logo Card outside of the LinearLayout -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent">
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:id="@+id/logoCard"
+                android:background="@color/black"
+                android:clickable="true"
+                android:focusable="true"
+                tools:ignore="SpeakableTextPresentCheck">
+                <!-- Logo content goes here -->
+            </LinearLayout>
 
-                <!-- Logo Card -->
-                <LinearLayout
-                    android:id="@+id/logoCard"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+            <!-- Cards Layout -->
+            <LinearLayout
+                android:id="@+id/cardsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="905dp"
+                android:background="@color/black"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <!-- Card 1: Stock Mode -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardStockMode"
+                    android:layout_width="300dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="1dp"
                     android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
                     android:focusable="true"
-                    android:orientation="horizontal"
-                    android:padding="16dp">
-                    <!-- Logo content goes here -->
-                </LinearLayout>
+                    android:foreground="@drawable/ripple_golden"
+                    android:onClick="onClickStockMode"
+                    android:padding="15dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="12dp"
+                    app:cardUseCompatPadding="true">
 
-                <!-- Cards Layout -->
-                <LinearLayout
-                    android:id="@+id/cardsLayout"
-                    android:layout_width="380dp"
-                    android:layout_height="780dp"
-                    android:layout_centerInParent="true"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@id/logoCard">
+                    <!-- Card content goes here -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/black">
 
-                    <!-- Card 1: Stock Mode -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/cardStockMode"
-                        android:layout_width="300dp"
-                        android:layout_height="150dp"
-                        android:layout_margin="1dp"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="@drawable/ripple_golden"
-                        android:onClick="onClickStockMode"
-                        android:padding="15dp"
-                        app:cardCornerRadius="15dp"
-                        app:cardElevation="12dp"
-                        app:cardUseCompatPadding="true">
+                        <!-- Add the following line for the checkmark overlay -->
+                        <ImageView
+                            android:id="@+id/checkmarkOverlayStockMode"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="top|start"
+                            android:src="@drawable/overlay_checkmark"
+                            android:visibility="gone"
+                            tools:ignore="ContentDescription" />
+
+                        <!-- Inner content of the card -->
+                        <TextView
+                            android:id="@+id/textStockMode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:gravity="center"
+                            android:text="@string/stock_mode_noptimal_performance"
+                            android:textColor="@color/md_theme_dark_error"
+                            android:textSize="20sp" />
+
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Card 2: Ultra Battery Mode -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardUltraBatteryMode"
+                    android:layout_width="300dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="1dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="@drawable/ripple_golden"
+                    android:onClick="onClickUltraBatteryMode"
+                    android:padding="24dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="12dp"
+                    app:cardUseCompatPadding="true">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/black">
+
+                        <!-- Add the following line for the checkmark overlay -->
+                        <ImageView
+                            android:id="@+id/checkmarkOverlayUltraBatteryMode"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="top|start"
+                            android:src="@drawable/overlay_checkmark"
+                            android:visibility="gone"
+                            tools:ignore="ContentDescription" />
 
                         <!-- Card content goes here -->
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/black">
+                        <TextView
+                            android:id="@+id/textUltraBatteryMode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:gravity="center"
+                            android:text="@string/ultra_battery_mode_nmaximize_battery_life"
+                            android:textColor="@color/md_theme_dark_onBackground"
+                            android:textSize="20sp" />
 
-                            <!-- Add the following line for the checkmark overlay -->
-                            <ImageView
-                                android:id="@+id/checkmarkOverlayStockMode"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_gravity="top|start"
-                                android:src="@drawable/overlay_checkmark"
-                                android:visibility="gone" />
-
-                            <!-- Inner content of the card -->
-                            <TextView
-                                android:id="@+id/textStockMode"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:gravity="center"
-                                android:text="@string/stock_mode_noptimal_performance"
-                                android:textColor="@color/md_theme_dark_onPrimaryContainer"
-                                android:textSize="20sp" />
-
-                        </RelativeLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- Card 2: Ultra Battery Mode -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/cardUltraBatteryMode"
-                        android:layout_width="300dp"
-                        android:layout_height="150dp"
-                        android:layout_margin="1dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="@drawable/ripple_golden"
-                        android:onClick="onClickUltraBatteryMode"
-                        android:padding="24dp"
-                        app:cardCornerRadius="15dp"
-                        app:cardElevation="12dp"
-                        app:cardUseCompatPadding="true">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/black">
-
-                            <!-- Add the following line for the checkmark overlay -->
-                            <ImageView
-                                android:id="@+id/checkmarkOverlayUltraBatteryMode"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_gravity="top|start"
-                                android:src="@drawable/overlay_checkmark"
-                                android:visibility="gone" />
-
-                            <!-- Card content goes here -->
-                            <TextView
-                                android:id="@+id/textUltraBatteryMode"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:gravity="center"
-                                android:text="@string/ultra_battery_mode_nmaximize_battery_life"
-                                android:textColor="@color/md_theme_dark_onPrimaryContainer"
-                                android:textSize="20sp" />
-
-                        </RelativeLayout>
+                    </RelativeLayout>
 
 
-                    </com.google.android.material.card.MaterialCardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Card 3: Balanced Mode -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/cardBalancedMode"
-                        android:layout_width="300dp"
-                        android:layout_height="150dp"
-                        android:layout_margin="1dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="@drawable/ripple_golden"
-                        android:onClick="onClickBalancedMode"
-                        android:padding="24dp"
-                        app:cardCornerRadius="15dp"
-                        app:cardElevation="12dp"
-                        app:cardUseCompatPadding="true">
+                <!-- Card 3: Balanced Mode -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardBalancedMode"
+                    android:layout_width="300dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="1dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="@drawable/ripple_golden"
+                    android:onClick="onClickBalancedMode"
+                    android:padding="24dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="12dp"
+                    app:cardUseCompatPadding="true">
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/black">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/black">
 
-                            <!-- Add the following line for the checkmark overlay -->
-                            <ImageView
-                                android:id="@+id/checkmarkOverlayBalancedMode"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_gravity="top|start"
-                                android:src="@drawable/overlay_checkmark"
-                                android:visibility="gone" />
+                        <!-- Add the following line for the checkmark overlay -->
+                        <ImageView
+                            android:id="@+id/checkmarkOverlayBalancedMode"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="top|start"
+                            android:src="@drawable/overlay_checkmark"
+                            android:visibility="gone"
+                            tools:ignore="ContentDescription" />
 
-                            <!-- Card content goes here -->
-                            <TextView
-                                android:id="@+id/textBalancedMode"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:gravity="center"
-                                android:text="@string/balanced_mode_balance"
-                                android:textColor="@color/md_theme_dark_onPrimaryContainer"
-                                android:textSize="20sp" />
+                        <!-- Card content goes here -->
+                        <TextView
+                            android:id="@+id/textBalancedMode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:gravity="center"
+                            android:text="@string/balanced_mode_balance"
+                            android:textColor="@color/md_theme_light_secondaryContainer"
+                            android:textSize="20sp" />
 
-                        </RelativeLayout>
-
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- Card 4: Gaming Mode -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/cardGamingMode"
-                        android:layout_width="300dp"
-                        android:layout_height="150dp"
-                        android:layout_margin="1dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="@drawable/ripple_golden"
-                        android:onClick="onClickGamingMode"
-                        android:padding="24dp"
-                        app:cardCornerRadius="15dp"
-                        app:cardElevation="12dp"
-                        app:cardUseCompatPadding="true">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/black">
+                    </RelativeLayout>
 
 
-                            <!-- Add the following line for the checkmark overlay -->
-                            <ImageView
-                                android:id="@+id/checkmarkOverlayGamingMode"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_gravity="top|start"
-                                android:src="@drawable/overlay_checkmark"
-                                android:visibility="gone" />
+                </com.google.android.material.card.MaterialCardView>
 
-                            <!-- Card content goes here -->
-                            <TextView
-                                android:id="@+id/textGamingMode"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:gravity="center"
-                                android:text="@string/gaming_mode_noptimized_for_gaming"
-                                android:textColor="@color/md_theme_dark_onPrimaryContainer"
-                                android:textSize="20sp" />
+                <!-- Card 4: Gaming Mode -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardGamingMode"
+                    android:layout_width="300dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="1dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="@drawable/ripple_golden"
+                    android:onClick="onClickGamingMode"
+                    android:padding="24dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="12dp"
+                    app:cardUseCompatPadding="true">
 
-                        </RelativeLayout>
-
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- Card 5: Autonomous Mode -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/cardAutonomousMode"
-                        android:layout_width="300dp"
-                        android:layout_height="150dp"
-                        android:layout_margin="1dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="@drawable/ripple_golden"
-                        android:onClick="onClickAutonomousMode"
-                        android:padding="24dp"
-                        app:cardCornerRadius="15dp"
-                        app:cardElevation="12dp"
-                        app:cardUseCompatPadding="true">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/black">
-
-                            <!-- Add the following line for the checkmark overlay -->
-                            <ImageView
-                                android:id="@+id/checkmarkOverlayAutoMode"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_gravity="top|start"
-                                android:src="@drawable/overlay_checkmark"
-                                android:visibility="gone" />
-
-                            <!-- Card content goes here -->
-                            <TextView
-                                android:id="@+id/textAutonomousMode"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:gravity="center"
-                                android:text="@string/autonomous_mode_nautomatic_performance"
-                                android:textColor="@color/md_theme_dark_onPrimaryContainer"
-                                android:textSize="20sp" />
-
-                        </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/black">
 
 
-                    </com.google.android.material.card.MaterialCardView>
+                        <!-- Add the following line for the checkmark overlay -->
+                        <ImageView
+                            android:id="@+id/checkmarkOverlayGamingMode"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="top|start"
+                            android:src="@drawable/overlay_checkmark"
+                            android:visibility="gone"
+                            tools:ignore="ContentDescription" />
 
-                </LinearLayout>
-            </RelativeLayout>
-        </ScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</RelativeLayout>
+                        <!-- Card content goes here -->
+                        <TextView
+                            android:id="@+id/textGamingMode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:gravity="center"
+                            android:text="@string/gaming_mode_noptimized_for_gaming"
+                            android:textColor="@color/activatedColor"
+                            android:textSize="20sp" />
+
+                    </RelativeLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Card 5: Autonomous Mode -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardAutonomousMode"
+                    android:layout_width="300dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="1dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="@drawable/ripple_golden"
+                    android:onClick="onClickAutonomousMode"
+                    android:padding="24dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="12dp"
+                    app:cardUseCompatPadding="true"
+                    tools:ignore="TextSizeCheck">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/black">
+
+                        <!-- Add the following line for the checkmark overlay -->
+                        <ImageView
+                            android:id="@+id/checkmarkOverlayAutoMode"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top|start"
+                            android:src="@drawable/overlay_checkmark"
+                            android:visibility="gone"
+                            tools:ignore="ContentDescription" />
+
+                        <!-- Card content goes here -->
+                        <TextView
+                            android:id="@+id/textAutonomousMode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:gravity="center"
+                            android:text="@string/autonomous_mode_nautomatic_performance"
+                            android:textColor="@color/lightblue"
+                            android:textSize="20sp" />
+
+                    </RelativeLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+            </LinearLayout>
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/black"
+        app:itemIconTint="@color/md_theme_dark_surfaceTint"
+        app:itemTextColor="@color/md_theme_dark_surfaceTint"
+        app:menu="@menu/bottom_nav_menu" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

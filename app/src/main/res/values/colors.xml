@@ -63,4 +63,7 @@
     <color name="md_theme_dark_scrim">#000000</color>
     <color name="black">#000000</color>
     <color name="activatedColor">#FF0000</color>
+    <color name="orange">#f86253</color>
+    <color name="pink">#f14985</color>
+    <color name="lightblue">#0096FF</color>
 </resources>

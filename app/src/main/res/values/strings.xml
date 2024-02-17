@@ -5,7 +5,22 @@
     <string name="balanced_mode_balance">Balanced Mode\nOptimal balance</string>
     <string name="gaming_mode_noptimized_for_gaming">Gaming Mode\nOptimized for gaming</string>
     <string name="autonomous_mode_nautomatic_performance">Autonomous Mode\nAutomatic performance</string>
-    <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Extras</string>
     <string name="title_home">Profiles</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="screen1">STRP v3.0</string>
+    <string name="screen2">Profile Swapping \nWith Ease!</string>
+    <string name="screen1desc">\n
+Stock\n
+Ultra Battery\n
+Balanced\n
+Gaming\n
+Autonomous</string>
+    <string name="screen2desc"> </string>
+    <string name="startDesc">Stratosphere Performance is a powerful Android app designed to work seamlessly with the upcoming Magisk module Stratosphere Performance v3.0. \n\nIt allows users to manage various performance profiles, customize settings and enjoying an enhanced Android experience.</string>
+    <string name="back">Back</string>
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+    <string name="get_started">START</string>
+    <string name="onboard_start_page_title">STRATOSPHERE</string>
 </resources>

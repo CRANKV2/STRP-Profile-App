@@ -8,19 +8,22 @@
     <string name="title_notifications">Extras</string>
     <string name="title_home">Profiles</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="screen1">STRP v3.0</string>
-    <string name="screen2">Profile Swapping \nWith Ease!</string>
-    <string name="screen1desc">\n
-Stock\n
-Ultra Battery\n
-Balanced\n
-Gaming\n
-Autonomous</string>
-    <string name="screen2desc"> </string>
+
+    <string name="screen1">Different Profiles</string>
+    <string name="screen2">Customizations</string>
+    <string name="screen3">Profile Swapping \nWith Ease!</string>
+    <string name="screen4">Additional Features\n(Future Updates):</string>
+
+    <string name="screen1desc">Stock - Ultra Battery\nBalanced - Gaming\nAutonomous</string>
+    <string name="screen2desc">- Change app background\n- Toggle between light and dark mode\n- Dynamic coloring with Material3 colors (coming soon)</string>
+    <string name="screen3desc">Easly just click on any Profile "Card" inside the main Screen and you are Ready to go!</string>
+    <string name="screen4desc">RAM management options\nKernel adjustments\nForce closing features\nAnd many more will come!</string>
+
     <string name="startDesc">Stratosphere Performance is a powerful Android app designed to work seamlessly with the upcoming Magisk module Stratosphere Performance v3.0. \n\nIt allows users to manage various performance profiles, customize settings and enjoying an enhanced Android experience.</string>
     <string name="back">Back</string>
     <string name="skip">Skip</string>
     <string name="next">Next</string>
     <string name="get_started">START</string>
     <string name="onboard_start_page_title">STRATOSPHERE</string>
+    <string name="dialog_storage_access_text">Without storage access, the app cannot function properly. Please grant the necessary permission. \n\nDon\'t worry, we won\'t bite 😁\n\nActually, the access is just needed to change the in-app background.</string>
 </resources>

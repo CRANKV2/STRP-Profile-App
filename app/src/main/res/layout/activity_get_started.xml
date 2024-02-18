@@ -10,21 +10,21 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginTop="50dp"
+        android:layout_height="297dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/onboard_start_page_title"
         android:scaleType="fitCenter"
-        android:src="@drawable/start"
-        android:contentDescription="@string/onboard_start_page_title" />
+        android:src="@drawable/start" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="@string/onboard_start_page_title"
         android:textAlignment="center"
         android:textColor="@color/md_theme_dark_surfaceTint"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <TextView
@@ -33,11 +33,11 @@
         android:layout_marginHorizontal="30dp"
         android:text="@string/startDesc"
         android:fontFamily="@font/poppins_semibold"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:textAlignment="center"
         android:textStyle="bold"
         android:textColor="@color/md_theme_light_surfaceTint"
-        android:textSize="17sp"/>
+        android:textSize="15sp"/>
 
     <Button
         android:id="@+id/startButton"

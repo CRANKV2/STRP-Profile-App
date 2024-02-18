@@ -16,18 +16,24 @@ public class ViewPagerAdapter extends PagerAdapter {
     Context context;
 
     int[] sliderAllImages = {
-            R.drawable.start,
+            R.drawable.onb_profiles,
+            R.drawable.onb_profiles,
+            R.drawable.onb_profiles,
             R.drawable.onb_profiles,
     };
 
     int[] sliderAllTitle = {
             R.string.screen1,
             R.string.screen2,
+            R.string.screen3,
+            R.string.screen4,
     };
 
     int[] sliderAllDesc = {
             R.string.screen1desc,
             R.string.screen2desc,
+            R.string.screen3desc,
+            R.string.screen4desc,
     };
 
     public ViewPagerAdapter(Context context){

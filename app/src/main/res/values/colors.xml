@@ -74,4 +74,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="lavender">#8692f7</color>
     <color name="grey">#808080</color>
+    <color name="storage_dialog_text_color">#FABC3E</color>
 </resources>

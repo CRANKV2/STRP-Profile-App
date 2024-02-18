@@ -26,7 +26,6 @@ public class NavigationActivity extends AppCompatActivity {
         }
         @Override
         public void onPageSelected(int position) {
-
             setDotIndicator(position);
 
             if (position > 0) {
@@ -34,12 +33,15 @@ public class NavigationActivity extends AppCompatActivity {
             } else {
                 backButton.setVisibility(View.INVISIBLE);
             }
-            if (position == 2){
+
+            int lastPageIndex = viewPagerAdapter.getCount() - 1;
+            if (position == lastPageIndex) {
                 nextButton.setText("Finish");
             } else {
                 nextButton.setText("Next");
             }
         }
+
         @Override
         public void onPageScrollStateChanged(int state) {
 
@@ -67,7 +69,7 @@ public class NavigationActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (getItem(0) < 2)
+                if (getItem(0) < 3)
                     slideViewPager.setCurrentItem(getItem(1), true);
                 else {
                     Intent i = new Intent(NavigationActivity.this, GetStarted.class);
@@ -80,7 +82,7 @@ public class NavigationActivity extends AppCompatActivity {
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(NavigationActivity.this, MainActivity.class);
+                Intent i = new Intent(NavigationActivity.this, GetStarted.class);
                 startActivity(i);
                 finish();
             }
@@ -98,7 +100,7 @@ public class NavigationActivity extends AppCompatActivity {
 
     public void setDotIndicator(int position) {
 
-        dots = new TextView[3];
+        dots = new TextView[4];
         dotIndicator.removeAllViews();
 
         for (int i = 0; i < dots.length; i++) {
@@ -108,7 +110,7 @@ public class NavigationActivity extends AppCompatActivity {
             dots[i].setTextColor(getResources().getColor(R.color.grey, getApplicationContext().getTheme()));
             dotIndicator.addView(dots[i]);
         }
-        dots[position].setTextColor(getResources().getColor(R.color.lavender, getApplicationContext().getTheme()));
+        dots[position].setTextColor(getResources().getColor(R.color.md_theme_dark_surfaceTint, getApplicationContext().getTheme()));
     }
 
     private int getItem(int i) {

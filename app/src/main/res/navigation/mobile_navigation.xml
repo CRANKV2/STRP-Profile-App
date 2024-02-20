@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.strp.strp_test.ui.notifications.NotificationsFragment"
+        android:name="com.strp.strp_test.ui.extras.FragmentExtras"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_extras" />
 </navigation>

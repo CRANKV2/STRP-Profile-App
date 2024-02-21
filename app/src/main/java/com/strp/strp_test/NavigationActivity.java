@@ -1,12 +1,14 @@
 package com.strp.strp_test;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -18,12 +20,15 @@ public class NavigationActivity extends AppCompatActivity {
     TextView[] dots;
     ViewPagerAdapter viewPagerAdapter;
 
+    private static final String PREF_NAME = "MyPrefs";
+    private static final String PREF_ONBOARDING_COMPLETED = "onboardingCompleted";
 
     ViewPager.OnPageChangeListener viewPagerListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
         }
+
         @Override
         public void onPageSelected(int position) {
             setDotIndicator(position);
@@ -51,6 +56,17 @@ public class NavigationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Check if onboarding is completed
+        boolean onboardingCompleted = getSharedPreferences(PREF_NAME, MODE_PRIVATE)
+                .getBoolean(PREF_ONBOARDING_COMPLETED, false);
+
+        if (onboardingCompleted) {
+            // Onboarding completed, navigate to MainActivity
+            startActivity(new Intent(this, GetStarted.class));
+            finish();  // Finish the current activity to prevent going back to onboarding
+        }
+
         setContentView(R.layout.activity_navigation);
 
         backButton = findViewById(R.id.backButton);
@@ -72,6 +88,9 @@ public class NavigationActivity extends AppCompatActivity {
                 if (getItem(0) < 3)
                     slideViewPager.setCurrentItem(getItem(1), true);
                 else {
+                    // Onboarding completed, set the flag
+                    setOnboardingCompleted();
+
                     Intent i = new Intent(NavigationActivity.this, GetStarted.class);
                     startActivity(i);
                     finish();
@@ -82,14 +101,17 @@ public class NavigationActivity extends AppCompatActivity {
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Onboarding completed, set the flag
+                setOnboardingCompleted();
+
                 Intent i = new Intent(NavigationActivity.this, GetStarted.class);
                 startActivity(i);
                 finish();
             }
         });
 
-        slideViewPager = (ViewPager) findViewById(R.id.slideViewPager);
-        dotIndicator = (LinearLayout) findViewById(R.id.dotIndicator);
+        slideViewPager = findViewById(R.id.slideViewPager);
+        dotIndicator = findViewById(R.id.dotIndicator);
 
         viewPagerAdapter = new ViewPagerAdapter(this);
         slideViewPager.setAdapter(viewPagerAdapter);
@@ -115,5 +137,13 @@ public class NavigationActivity extends AppCompatActivity {
 
     private int getItem(int i) {
         return slideViewPager.getCurrentItem() + i;
+    }
+
+    // Method to set onboarding as completed
+    private void setOnboardingCompleted() {
+        SharedPreferences preferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(PREF_ONBOARDING_COMPLETED, true);
+        editor.apply();
     }
 }

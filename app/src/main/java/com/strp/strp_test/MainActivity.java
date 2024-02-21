@@ -1,6 +1,7 @@
 package com.strp.strp_test;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import com.strp.strp_test.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private static final String PREF_NAME = "MyPrefs";
+    private static final String PREF_IMAGE_URI = "backgroundImageUri";
     private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
     private static final int PICK_IMAGE_REQUEST_CODE = 2;
 
@@ -115,6 +117,12 @@ public class MainActivity extends AppCompatActivity {
             // Log error message if NavHostFragment is null
             Log.e("MainActivity", "NavHostFragment is null");
         }
+
+        // Retrieve the saved image URI and set the background
+        Uri savedImageUri = getSavedImageUri();
+        if (savedImageUri != null) {
+            setActivityBackground(savedImageUri);
+        }
     }
 
     private void activateProfile(SwitchMaterial selectedSwitch) {
@@ -182,6 +190,9 @@ public class MainActivity extends AppCompatActivity {
             // Get the selected image URI
             Uri selectedImageUri = data.getData();
 
+            // Save the selected image URI
+            saveImageUri(selectedImageUri);
+
             // Set the selected image as the background using Glide
             setActivityBackground(selectedImageUri);
         }
@@ -204,5 +215,20 @@ public class MainActivity extends AppCompatActivity {
                     new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
                     STORAGE_PERMISSION_REQUEST_CODE);
         }
+    }
+
+    // Add this method to save the selected image URI
+    private void saveImageUri(Uri imageUri) {
+        SharedPreferences preferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(PREF_IMAGE_URI, imageUri.toString());
+        editor.apply();
+    }
+
+    // Add this method to retrieve the saved image URI
+    private Uri getSavedImageUri() {
+        SharedPreferences preferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        String uriString = preferences.getString(PREF_IMAGE_URI, null);
+        return uriString != null ? Uri.parse(uriString) : null;
     }
 }

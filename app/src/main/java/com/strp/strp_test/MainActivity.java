@@ -9,12 +9,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -23,8 +19,9 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.strp.strp_test.databinding.ActivityMainBinding;
 
@@ -37,27 +34,22 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private SwitchMaterial lastSelectedSwitch;
-    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Continue with your existing code
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Check and request storage permission if needed
         checkStoragePermission();
 
-        // Initialize Switch buttons
         SwitchMaterial switchStockMode = findViewById(R.id.switchStockMode);
         SwitchMaterial switchUltraBatteryMode = findViewById(R.id.switchUltraBatteryMode);
         SwitchMaterial switchBalancedMode = findViewById(R.id.switchBalancedMode);
         SwitchMaterial switchGamingMode = findViewById(R.id.switchGamingMode);
         SwitchMaterial switchAutonomousMode = findViewById(R.id.switchAutonomousMode);
 
-        // Set OnCheckedChangeListener for each switch
         switchStockMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 onClickStockMode(buttonView);
@@ -93,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Set up ActionBar
         setSupportActionBar(binding.toolbar);
 
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
@@ -104,21 +95,14 @@ public class MainActivity extends AppCompatActivity {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.mobile_navigation);
 
         if (navHostFragment != null) {
-            navController = navHostFragment.getNavController();
+            NavController navController = navHostFragment.getNavController();
 
-            if (navController != null) {
-                NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-                NavigationUI.setupWithNavController(navView, navController);
-            } else {
-                // Log error message if NavController is null
-                Log.e("MainActivity", "NavController is null");
-            }
+            NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+            NavigationUI.setupWithNavController(navView, navController);
         } else {
-            // Log error message if NavHostFragment is null
             Log.e("MainActivity", "NavHostFragment is null");
         }
 
-        // Retrieve the saved image URI and set the background
         Uri savedImageUri = getSavedImageUri();
         if (savedImageUri != null) {
             setActivityBackground(savedImageUri);
@@ -127,13 +111,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void activateProfile(SwitchMaterial selectedSwitch) {
         if (lastSelectedSwitch != null && lastSelectedSwitch != selectedSwitch) {
-            // Disable the last selected switch
             lastSelectedSwitch.setChecked(false);
         }
 
-        // Enable the newly selected switch
         selectedSwitch.setChecked(true);
-
         lastSelectedSwitch = selectedSwitch;
     }
 
@@ -168,7 +149,6 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-            // Handle the Change In-App Background menu item click
             openImagePicker();
             return true;
         }
@@ -187,37 +167,28 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-            // Get the selected image URI
             Uri selectedImageUri = data.getData();
-
-            // Save the selected image URI
             saveImageUri(selectedImageUri);
-
-            // Set the selected image as the background using Glide
             setActivityBackground(selectedImageUri);
         }
     }
 
     private void setActivityBackground(Uri imageUri) {
-        // Use Glide to load the image into the ImageView with id "backgroundImage"
         Glide.with(this)
                 .load(imageUri)
-                .apply(new RequestOptions().centerCrop()) // Optional: use centerCrop for better fitting
+                .apply(new RequestOptions().centerCrop())
                 .into(binding.backgroundImage);
     }
 
     private void checkStoragePermission() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
-            // Permission is not granted
-            // Request the permission
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
                     STORAGE_PERMISSION_REQUEST_CODE);
         }
     }
 
-    // Add this method to save the selected image URI
     private void saveImageUri(Uri imageUri) {
         SharedPreferences preferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -225,7 +196,6 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    // Add this method to retrieve the saved image URI
     private Uri getSavedImageUri() {
         SharedPreferences preferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         String uriString = preferences.getString(PREF_IMAGE_URI, null);

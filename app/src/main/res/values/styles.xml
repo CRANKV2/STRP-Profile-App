@@ -4,4 +4,9 @@
         <item name="android:scrollbarThumbVertical">@color/black</item>
         <item name="android:scrollbarSize">8dp</item>
     </style>
+    <style name="SwitchTheme" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="thumbTint">@color/golden_color</item>
+        <item name="trackTint">@color/black</item>
+        <item name="trackTintMode">src_atop</item>
+    </style>
 </resources>

@@ -8,12 +8,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
@@ -23,6 +22,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.strp.strp_test.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST_CODE = 2;
 
     private ActivityMainBinding binding;
-    private CardView lastSelectedCard;
+    private SwitchMaterial lastSelectedSwitch;
     private NavController navController;
 
     @Override
@@ -46,37 +46,47 @@ public class MainActivity extends AppCompatActivity {
         // Check and request storage permission if needed
         checkStoragePermission();
 
-        // Initialize CardViews
-        MaterialCardView cardStockMode = findViewById(R.id.cardStockMode);
-        MaterialCardView cardUltraBatteryMode = findViewById(R.id.cardUltraBatteryMode);
-        MaterialCardView cardBalancedMode = findViewById(R.id.cardBalancedMode);
-        MaterialCardView cardGamingMode = findViewById(R.id.cardGamingMode);
-        MaterialCardView cardAutonomousMode = findViewById(R.id.cardAutonomousMode);
+        // Initialize Switch buttons
+        SwitchMaterial switchStockMode = findViewById(R.id.switchStockMode);
+        SwitchMaterial switchUltraBatteryMode = findViewById(R.id.switchUltraBatteryMode);
+        SwitchMaterial switchBalancedMode = findViewById(R.id.switchBalancedMode);
+        SwitchMaterial switchGamingMode = findViewById(R.id.switchGamingMode);
+        SwitchMaterial switchAutonomousMode = findViewById(R.id.switchAutonomousMode);
 
-        // Set click listeners for each card
-        cardStockMode.setOnClickListener(view -> {
-            onClickStockMode(view);
-            activateProfile(cardStockMode);
+        // Set OnCheckedChangeListener for each switch
+        switchStockMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                onClickStockMode(buttonView);
+                activateProfile(switchStockMode);
+            }
         });
 
-        cardUltraBatteryMode.setOnClickListener(view -> {
-            onClickUltraBatteryMode(view);
-            activateProfile(cardUltraBatteryMode);
+        switchUltraBatteryMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                onClickUltraBatteryMode(buttonView);
+                activateProfile(switchUltraBatteryMode);
+            }
         });
 
-        cardBalancedMode.setOnClickListener(view -> {
-            onClickBalancedMode(view);
-            activateProfile(cardBalancedMode);
+        switchBalancedMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                onClickBalancedMode(buttonView);
+                activateProfile(switchBalancedMode);
+            }
         });
 
-        cardGamingMode.setOnClickListener(view -> {
-            onClickGamingMode(view);
-            activateProfile(cardGamingMode);
+        switchGamingMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                onClickGamingMode(buttonView);
+                activateProfile(switchGamingMode);
+            }
         });
 
-        cardAutonomousMode.setOnClickListener(view -> {
-            onClickAutonomousMode(view);
-            activateProfile(cardAutonomousMode);
+        switchAutonomousMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                onClickAutonomousMode(buttonView);
+                activateProfile(switchAutonomousMode);
+            }
         });
 
         // Set up ActionBar
@@ -105,50 +115,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void activateProfile(CardView selectedCard) {
-        if (lastSelectedCard != null) {
-            int lastCheckmarkOverlayId = getCheckmarkOverlayId(lastSelectedCard);
-            hideCheckmarkOverlay(lastCheckmarkOverlayId, lastSelectedCard);
+    private void activateProfile(SwitchMaterial selectedSwitch) {
+        if (lastSelectedSwitch != null && lastSelectedSwitch != selectedSwitch) {
+            // Disable the last selected switch
+            lastSelectedSwitch.setChecked(false);
         }
 
-        int checkmarkOverlayId = getCheckmarkOverlayId(selectedCard);
-        showCheckmarkOverlay(checkmarkOverlayId, selectedCard);
-        ((MaterialCardView) selectedCard).setCardBackgroundColor(ContextCompat.getColor(this, R.color.activatedColor));
+        // Enable the newly selected switch
+        selectedSwitch.setChecked(true);
 
-        lastSelectedCard = selectedCard;
-    }
-
-    private int getCheckmarkOverlayId(CardView card) {
-        int cardId = card.getId();
-
-        if (cardId == R.id.cardStockMode) {
-            return R.id.checkmarkOverlayStockMode;
-        } else if (cardId == R.id.cardUltraBatteryMode) {
-            return R.id.checkmarkOverlayUltraBatteryMode;
-        } else if (cardId == R.id.cardBalancedMode) {
-            return R.id.checkmarkOverlayBalancedMode;
-        } else if (cardId == R.id.cardGamingMode) {
-            return R.id.checkmarkOverlayGamingMode;
-        } else if (cardId == R.id.cardAutonomousMode) {
-            return R.id.checkmarkOverlayAutoMode;
-        } else {
-            return 0;
-        }
-    }
-
-    private void hideCheckmarkOverlay(int checkmarkOverlayId, View card) {
-        if (checkmarkOverlayId != 0) {
-            ImageView checkmarkOverlay = card.findViewById(checkmarkOverlayId);
-            checkmarkOverlay.setVisibility(View.GONE);
-            ((MaterialCardView) card).setCardBackgroundColor(ContextCompat.getColor(this, R.color.black));
-        }
-    }
-
-    private void showCheckmarkOverlay(int checkmarkOverlayId, View card) {
-        if (checkmarkOverlayId != 0) {
-            ImageView checkmarkOverlay = card.findViewById(checkmarkOverlayId);
-            checkmarkOverlay.setVisibility(View.VISIBLE);
-        }
+        lastSelectedSwitch = selectedSwitch;
     }
 
     public void onClickStockMode(View view) {

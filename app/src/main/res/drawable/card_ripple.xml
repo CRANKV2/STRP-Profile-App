@@ -1,0 +1,18 @@
+<!-- res/drawable/card_ripple.xml -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/golden_color"> <!-- Change to your desired color -->
+
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/golden_color" /> <!-- Change to your desired color -->
+            <corners android:radius="25dp" /> <!-- Adjust the radius as needed -->
+        </shape>
+    </item>
+
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <corners android:radius="25dp" /> <!-- Adjust the radius as needed -->
+        </shape>
+    </item>
+</ripple>

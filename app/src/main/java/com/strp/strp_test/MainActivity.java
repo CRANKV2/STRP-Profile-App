@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -180,10 +182,17 @@ public class MainActivity extends AppCompatActivity {
             // Get the selected image URI
             Uri selectedImageUri = data.getData();
 
-            // Implement the logic to set the selected image as the background
-            // For simplicity, let's show a Toast message with the selected image URI
-            Toast.makeText(this, "Selected Image: " + selectedImageUri.toString(), Toast.LENGTH_SHORT).show();
+            // Set the selected image as the background using Glide
+            setActivityBackground(selectedImageUri);
         }
+    }
+
+    private void setActivityBackground(Uri imageUri) {
+        // Use Glide to load the image into the ImageView with id "backgroundImage"
+        Glide.with(this)
+                .load(imageUri)
+                .apply(new RequestOptions().centerCrop()) // Optional: use centerCrop for better fitting
+                .into(binding.backgroundImage);
     }
 
     private void checkStoragePermission() {

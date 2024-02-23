@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
@@ -39,17 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Get the user's theme preference
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean useDarkTheme = sharedPref.getBoolean("use_dark_theme", false);
-
-        // Set the theme based on the user's preference
-        if (useDarkTheme) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
-
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -159,32 +146,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        SharedPreferences sharedPref = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
+        int id = item.getItemId();
 
-        int itemId = item.getItemId();
-
-        if (itemId == R.id.action_settings) {
+        if (id == R.id.action_settings) {
             openImagePicker();
             return true;
-        } else if (itemId == R.id.action_DarkLight) {
-            // Handle the submenu items
-            return true;
-        } else if (itemId == R.id.action_Dark) {
-            // Set the dark theme
-            editor.putBoolean("use_dark_theme", true);
-        } else if (itemId == R.id.action_Light) {
-            // Set the light theme
-            editor.putBoolean("use_dark_theme", false);
-        } else {
-            return super.onOptionsItemSelected(item);
         }
 
-        editor.apply();
-        recreate();
-        return true;
+        return super.onOptionsItemSelected(item);
     }
-
 
     private void openImagePicker() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);

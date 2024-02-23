@@ -1,6 +1,6 @@
 <p align="center"><img src="https://github-readme-stats.vercel.app/api?username=CRANKV2&&show_icons=true&title_color=ffffff&icon_color=bb2acf&text_color=daf7dc&bg_color=151515"></p>
 
-<p align="center"><a href="https://t.me/AndroidRootModulesCommunity"><img src="https://i.imgur.com/Ow6ufiw.jpeg" width="500"></a></p>
+<p align="center"><a href="https://t.me/AndroidRootModulesCommunity"><img src="https://imgur.com/3cJAlvb.jpeg" width="500"></a></p>
 
 <h1 align="center"><b>STRP App</b></h1>
 

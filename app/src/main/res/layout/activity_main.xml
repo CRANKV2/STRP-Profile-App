@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:background="@drawable/default_background_image" />
+        android:background="@drawable/default_background_image"
+        tools:ignore="ContentDescription" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -46,149 +47,142 @@
             android:orientation="vertical">
 
 
-
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardStockMode"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardStockMode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="25dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/md_theme_dark_onError">
+                <!-- Profile 1: Stock Mode -->
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchStockMode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardBackgroundColor="#65988900"
-                    app:strokeColor="@color/md_theme_dark_onError"
-                    android:layout_margin="16dp"
-                    app:cardCornerRadius="25dp"
-                    app:cardElevation="4dp">
-                                <!-- Profile 1: Stock Mode -->
-                                <com.google.android.material.switchmaterial.SwitchMaterial
-                                    android:id="@+id/switchStockMode"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="15dp"
-                                    android:background="@drawable/card_ripple"
-                                    android:text="@string/stock_mode_noptimal_performance"
-                                    android:textColor="@color/md_theme_dark_error"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold"
-                                    android:theme="@style/SwitchTheme"
-                                    app:switchPadding="16dp"/>
-                </com.google.android.material.card.MaterialCardView>
-
-
-
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardUltraBatteryMode"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardBackgroundColor="#65988900"
-                    app:strokeColor="@color/md_theme_dark_onError"
-                    android:layout_margin="16dp"
-                    app:cardCornerRadius="25dp"
-                    app:cardElevation="4dp">
-                                <!-- Profile 2: Ultra Battery Mode -->
-                                <com.google.android.material.switchmaterial.SwitchMaterial
-                                    android:id="@+id/switchUltraBatteryMode"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="15dp"
-                                    android:text="@string/ultra_battery_mode_nmaximize_battery_life"
-                                    android:textColor="@color/md_theme_dark_onBackground"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold"
-                                    android:theme="@style/SwitchTheme"
-                                    app:switchPadding="16dp"/>
+                    android:layout_margin="15dp"
+                    android:background="@drawable/card_ripple"
+                    android:text="@string/stock_mode_noptimal_performance"
+                    android:textColor="@color/md_theme_dark_onBackground"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:theme="@style/SwitchTheme"
+                    app:switchPadding="0dp" />
             </com.google.android.material.card.MaterialCardView>
 
 
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardUltraBatteryMode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="25dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/md_theme_dark_onError">
+                <!-- Profile 2: Ultra Battery Mode -->
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchUltraBatteryMode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/card_ripple"
+                    android:text="@string/ultra_battery_mode_nmaximize_battery_life"
+                    android:textColor="@color/md_theme_dark_onBackground"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:theme="@style/SwitchTheme"
+                    app:switchPadding="16dp" />
+            </com.google.android.material.card.MaterialCardView>
 
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardBalancedMode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="16dp"
                 android:clickable="true"
                 android:focusable="true"
-                app:cardBackgroundColor="#65988900"
-                app:strokeColor="@color/md_theme_dark_onError"
-                android:layout_margin="16dp"
+                app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="25dp"
-                app:cardElevation="4dp">
-                                <!-- Profile 3: Balanced Mode -->
-                                <com.google.android.material.switchmaterial.SwitchMaterial
-                                    android:id="@+id/switchBalancedMode"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="15dp"
-                                    android:text="@string/balanced_mode_balance"
-                                    android:textColor="@color/md_theme_light_secondaryContainer"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold"
-                                    android:theme="@style/SwitchTheme"
-                                    app:switchPadding="16dp"/>
+                app:cardElevation="0dp"
+                app:strokeColor="@color/md_theme_dark_onError">
+                <!-- Profile 3: Balanced Mode -->
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchBalancedMode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/card_ripple"
+                    android:text="@string/balanced_mode_balance"
+                    android:textColor="@color/md_theme_dark_onBackground"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:theme="@style/SwitchTheme"
+                    app:switchPadding="16dp" />
             </com.google.android.material.card.MaterialCardView>
-
-
 
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardGamingMode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="16dp"
                 android:clickable="true"
                 android:focusable="true"
-                app:cardBackgroundColor="#65988900"
-                app:strokeColor="@color/md_theme_dark_onError"
-                android:layout_margin="16dp"
+                app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="25dp"
-                app:cardElevation="4dp">
-                                <!-- Profile 4: Gaming Mode -->
-                                <com.google.android.material.switchmaterial.SwitchMaterial
-                                    android:id="@+id/switchGamingMode"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="15dp"
-                                    android:text="@string/gaming_mode_noptimized_for_gaming"
-                                    android:textColor="@color/activatedColor"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold"
-                                    android:theme="@style/SwitchTheme"
-                                    app:switchPadding="16dp"/>
+                app:cardElevation="0dp"
+                app:strokeColor="@color/md_theme_dark_onError">
+                <!-- Profile 4: Gaming Mode -->
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchGamingMode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/card_ripple"
+                    android:text="@string/gaming_mode_noptimized_for_gaming"
+                    android:textColor="@color/md_theme_dark_onBackground"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:theme="@style/SwitchTheme"
+                    app:switchPadding="16dp" />
             </com.google.android.material.card.MaterialCardView>
-
-
 
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardAutonomousMode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="16dp"
                 android:clickable="true"
                 android:focusable="true"
-                app:cardBackgroundColor="#65988900"
-                app:strokeColor="@color/md_theme_dark_onError"
-                android:layout_margin="16dp"
+                app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="25dp"
-                app:cardElevation="4dp">
-                                <!-- Profile 5: Autonomous Mode -->
-                                <com.google.android.material.switchmaterial.SwitchMaterial
-                                    android:id="@+id/switchAutonomousMode"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="15dp"
-                                    android:text="@string/autonomous_mode_nautomatic_performance"
-                                    android:textColor="@color/golden_color"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold"
-                                    android:theme="@style/SwitchTheme"
-                                    app:switchPadding="16dp"/>
+                app:cardElevation="0dp"
+                app:strokeColor="@color/md_theme_dark_onError">
+                <!-- Profile 5: Autonomous Mode -->
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchAutonomousMode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/card_ripple"
+                    android:text="@string/autonomous_mode_nautomatic_performance"
+                    android:textColor="@color/md_theme_dark_onBackground"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:theme="@style/SwitchTheme"
+                    app:switchPadding="16dp" />
             </com.google.android.material.card.MaterialCardView>
 
 
-
-            </LinearLayout>
+        </LinearLayout>
             <!-- Add any other views or buttons as needed -->
     </androidx.core.widget.NestedScrollView>
 

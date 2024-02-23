@@ -27,4 +27,5 @@
     <string name="onboard_start_page_title">STRATOSPHERE</string>
     <string name="dialog_storage_access_text">Without storage access, the app cannot function properly. Please grant the necessary permission. \n\nDon\'t worry, we won\'t bite 😁\n\nActually, the access is just needed to change the in-app background.</string>
     <string name="change_background">Change Background</string>
+    <string name="dark_light_action_bar_setting_text">Dark / Light Mode</string>
 </resources>

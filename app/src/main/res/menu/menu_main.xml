@@ -6,5 +6,9 @@
         android:id="@+id/action_settings"
         android:title="@string/change_background"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_DarkLight"
+        android:title="@string/dark_light_action_bar_setting_text"
+        app:showAsAction="never" />
 
 </menu>
